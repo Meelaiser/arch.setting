@@ -260,7 +260,7 @@ exec --no-startup-id xcape -e 'Control_L=Escape'
 exec --no-startup-id goldendict
 #exec --no-startup-id blueman-assistant
 exec --no-startup-id blueman-applet
-exec --no-startup-id xcalib -co 40 -d :0 /home/meelaiser/Public/brightness/B156HAN04.3.icm
+exec --no-startup-id xcalib -co 40 -d :0 /home/meelaiser/.config/i3/B156HAN04.3.icm
 #exec --no-startup-id compton -b
 exec --no-startup-id nm-applet
 
