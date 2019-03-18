@@ -117,8 +117,8 @@ keycode  91 = KP_Delete KP_Decimal period Delete
 !keycode  89 = KP_Next KP_3 KP_Next KP_3
 !keycode  90 = KP_Insert KP_0 KP_Insert KP_0
 !keycode  91 = KP_Delete KP_Decimal KP_Delete KP_Decimal
-!keycode  92 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
-!keycode  93 =
+keycode  92 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
+keycode  93 =
 keycode  94 = Super_R NoSymbol Super_R
 !keycode  94 = less greater less greater bar brokenbar bar
 !! Change less to Super_R
@@ -139,7 +139,8 @@ keycode 105 = Control_R NoSymbol Control_R
 keycode 106 = KP_Divide KP_Divide slash slash 
 ! keycode 106 = KP_Divide KP_Divide KP_Divide KP_Divide KP_Divide KP_Divide XF86Ungrab
 keycode 107 = Print Sys_Req Print Sys_Req
-keycode 108 = Alt_R Meta_R Alt_R Meta_R
+! keycode 108 = Alt_R Meta_R Alt_R Meta_R
+keycode 108 = Mode_switch NoSymbol Mode_switch NoSymbol
 keycode 109 = Linefeed NoSymbol Linefeed
 keycode 110 = Home NoSymbol Home
 keycode 111 = Up NoSymbol Up
@@ -283,7 +284,7 @@ keycode 244 = XF86Battery NoSymbol XF86Battery
 keycode 245 = XF86Bluetooth NoSymbol XF86Bluetooth
 keycode 246 = XF86WLAN NoSymbol XF86WLAN
 keycode 247 =
-keycode 248 = z Z z
+keycode 248 =
 keycode 249 =
 keycode 250 =
 keycode 251 =
@@ -298,7 +299,8 @@ clear Mod4
 clear Mod5
 clear lock
 clear control
-add Mod1 = Alt_L Alt_R Meta_L
+!add Mod1 = Alt_L Alt_R Meta_L
+add Mod1 = Alt_L Meta_L
 add Mod2 = Num_Lock
 add Mod3 = Hyper_L
 add Mod4 = Super_L Super_R
