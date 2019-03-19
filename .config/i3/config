@@ -199,7 +199,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 default_border pixel 4 
 
-for_window [class="libreoffice"] focus child, layout stacking, focus
+for_window [class="libreoffice"] focus child, layout tabbed, focus
 
 #control brightness
 set $monitor eDP-1
