@@ -1,2 +1,2 @@
-# arch.setting
-my setting for arch linux
+# Arch_linux_setting
+My setting on arch linux.

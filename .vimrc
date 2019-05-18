@@ -1,9 +1,12 @@
 :filetype plugin on
 :syntax on
 :filetype indent on
-autocmd FileType python set breakindentopt=shift:4
 :set number
 :set ignorecase
+:set clipboard=unnamedplus
+autocmd FileType python set breakindentopt=shift:4
+:set tabstop=8
+:set shiftwidth=4
 
 function! ResCur()
   if line("'\"") <= line("$")
