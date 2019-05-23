@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --bg-scale '/home/meelaiser/.config/i3/wallpaper_black_screen.png' 
+feh --bg-scale ~/.config/i3/wallpaper_black_screen.png
