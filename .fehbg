@@ -1,3 +1,2 @@
 #!/bin/sh
-# feh --bg-scale '/home/meelaiser/Public/brightness0/wallpaper_RoadToDataScientist.png' 
-feh --bg-scale '/wallpaper_black_screen.png' 
+feh --bg-scale '/home/meelaiser/.config/i3/wallpaper_black_screen.png' 
