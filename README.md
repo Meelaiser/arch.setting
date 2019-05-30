@@ -25,50 +25,51 @@ Press space to move to the middle without click.
 
 Press super + space move to the middle and click.
 
-## mousekey
+### mousekey
 
-### Dependancy
+#### Dependancy
 xmodmap, xkbset
 
-### Usage
+#### Usage
 mapping:
-
-          \/*-
-
+```
+          /*-
 qwert    789+
-
 asdfg or 456
-
 zxcv     123
-
          0 
+```
 
 Press Shift or Enter on numpad to adjust pointer speed.
 
 move pointer:
-
-789    wer 
-
-4 6 or s f
-
-123    xcv
+```
+wer    789
+s f or 4 6
+xcv    123
+```
 
 click:
-
-5 or d
+```
+d or 5
+```
 
 double click:
-
-\+ or a
+```
+a or +
+```
 
 right click:
-
-0 or z
+```
+z or 0
+```
 
 sroll up and down:
-
-/* or tg
+```
+tg or \*
+```
 
 drag:
-
-\- or q
+```
+q or -
+```
