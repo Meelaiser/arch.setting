@@ -1,17 +1,17 @@
 # Arch_linux_setting
 My setting on arch linux.
 
-# Move mouse pointer using keyboard
+## Move mouse pointer using keyboard
 
-## keynav
+### keynav
 
-# Install
+#### Install
 
 Install keynav.
 
 Copy .keynavrc to ~/.
 
-# Usage:
+#### Usage:
 
 Press super + g.
 
@@ -21,19 +21,19 @@ Press any key to move pointer(1 to 0, q to p, a to ;, z to /).
 
 Press super + any go to smaller grid(1 to 0, q to p, a to ;, z to /).
 
-Press space to cancel.
+Press space to move to the middle without click.
 
-Press super + space to click the middle.
+Press super + space move to the middle and click.
 
-# mousekey
+## mousekey
 
-## Dependancy
+### Dependancy
 xmodmap, xkbset
 
-## Usage
+### Usage
 mapping:
 
-          /*-
+          \/*-
 
 qwert    789+
 
@@ -43,7 +43,7 @@ zxcv     123
 
          0 
 
-Press shift or enter on numpad to adjust pointer speed
+Press Shift or Enter on numpad to adjust pointer speed.
 
 move pointer:
 
@@ -59,7 +59,7 @@ click:
 
 double click:
 
-+ or a
+\+ or a
 
 right click:
 
@@ -71,4 +71,4 @@ sroll up and down:
 
 drag:
 
-- or q
+\- or q
