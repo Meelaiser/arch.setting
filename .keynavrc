@@ -1,20 +1,16 @@
-# The 'start' command alone is handled specially, in that any key sequence
-# mapped to 'start' will be grabbed when keynav starts up so you can invoke it
-# to activate keynav. The remaining keys are only recognized while keynav is
-# active
-#
-# Project page; http://www.semicomplete.com/projects/keynav
-
 # Use 'clear' to blow away any previous keybindings
 clear
 
 # Use 'daemonize' to background ourselves.
 #daemonize
 
-alt+space start, grid 10x4
+super+g start, grid 10x4
+#alt+space start, grid 10x4
 space end
 Escape end
+super+space click 1,end
 Return warp, click 1,end
+
 1 cell-select 1x1, warp, end
 2 cell-select 2x1, warp, end
 3 cell-select 3x1, warp, end
@@ -89,6 +85,37 @@ alt+comma cell-select 8x4, warp
 alt+period cell-select 9x4, warp
 alt+slash cell-select 10x4, warp
 
+super+q cell-select 1x2, warp
+super+w cell-select 2x2, warp
+super+e cell-select 3x2, warp
+super+r cell-select 4x2, warp
+super+t cell-select 5x2, warp
+super+y cell-select 6x2, warp
+super+u cell-select 7x2, warp
+super+i cell-select 8x2, warp
+super+o cell-select 9x2, warp
+super+p cell-select 10x2, warp
+super+a cell-select 1x3, warp
+super+s cell-select 2x3, warp
+super+d cell-select 3x3, warp
+super+f cell-select 4x3, warp
+Control+super+g cell-select 5x3, warp
+super+h cell-select 6x3, warp
+super+j cell-select 7x3, warp
+super+k cell-select 8x3, warp
+super+l cell-select 9x3, warp
+super+semicolon cell-select 10x3, warp
+super+z cell-select 1x4, warp
+super+x cell-select 2x4, warp
+super+c cell-select 3x4, warp
+super+v cell-select 4x4, warp
+super+b cell-select 5x4, warp
+super+n cell-select 6x4, warp
+super+m cell-select 7x4, warp
+super+comma cell-select 8x4, warp
+super+period cell-select 9x4, warp
+super+slash cell-select 10x4, warp
+
 #a history-back
 #z cursorzoom 200 200
 
@@ -99,9 +126,3 @@ alt+slash cell-select 10x4, warp
 #t sh "xdotool windowactivate $(xdotool search --title -- '- Google Chrome' | head -1); xdotool key ctrl+t",end
 # Paste
 #v sh "xdotool key shift+Insert"
-
-### Drag examples
-# Start drag holding the left mouse button
-#q drag 1
-# Start drag holding middle mouse + control and shift
-#w drag 2 ctrl+shift
