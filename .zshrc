@@ -7,6 +7,3 @@ alias p='powerpill'
 alias sp='sudo powerpill'
 alias sps='sudo powerpill -S'
 alias y='yay'
-
-export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
