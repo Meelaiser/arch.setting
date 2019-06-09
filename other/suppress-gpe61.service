@@ -1,0 +1,8 @@
+[Unit]
+Description=Disables GPE 61, an interrupt that is going crazy on MSI
+
+[Service]
+ExecStart=/usr/bin/bash -c 'echo "disable" > /sys/firmware/acpi/interrupts/gpe61'
+
+[Install]
+WantedBy=multi-user.target
