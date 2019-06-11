@@ -136,7 +136,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 #    status_command    i3status
-    status_command    py3status -c /home/meelaiser/.config/i3status/config
+    status_command    py3status -c ~/.config/i3status/config
     mode              hide
     hidden_state      hide
     workspace_buttons yes
@@ -196,16 +196,19 @@ show_marks yes
 
 #control brightness
 #dependancy bc
-set $monitor eDP-1
-set $monitor2 VGA-1
-#set $monitor3 DP2
-set $monitor3 HDMI-2
-bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -m 1 -i brightness | awk -F' ' '{ print $2 }' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor --brightness
-bindsym $mod+slash exec --no-startup-id xrandr --verbose | grep -m 1 -i brightness | awk -F' ' '{ print $2 }' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor --brightness
-bindsym $mod+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 -i brightness | awk -F' ' '{ print $2 }' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
-bindsym $mod+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 -i brightness | awk -F' ' '{ print $2 }' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
-bindsym $mod+Shift+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 -i brightness | awk -F' ' '{ print $2 }' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
-bindsym $mod+Shift+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 -i brightness | awk -F' ' '{ print $2 }' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
+set $monitor1 eDP-1
+set $monitor2 DP-2
+set $monitor3 VGA-1
+#set $monitor3 HDMI-2
+# monitor1
+bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor1 --brightness
+bindsym $mod+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor1 --brightness
+# monitor2
+bindsym $mod+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
+bindsym $mod+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
+# monitor3
+bindsym $mod+Shift+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
+bindsym $mod+Shift+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
 
 #start applications
 bindsym Print exec --no-startup-id i3-scrot
