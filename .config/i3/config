@@ -197,22 +197,26 @@ show_marks yes
 #control brightness
 #dependancy bc
 set $monitor1 eDP-1
-set $monitor2 DP-2
-set $monitor3 VGA-1
+set $monitor2 DP-1
+set $monitor3 DP-2
+set $monitor4 VGA-1
 #set $monitor3 HDMI-2
 # monitor1
 bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor1 --brightness
 bindsym $mod+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor1 --brightness
 # monitor2
-bindsym $mod+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
-bindsym $mod+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
+bindsym $mod+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
+bindsym $mod+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
 # monitor3
-bindsym $mod+Shift+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
-bindsym $mod+Shift+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
+bindsym $mod+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
+bindsym $mod+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
+# monitor4
+bindsym $mod+Ctrl+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor4 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor4 --brightness
+bindsym $mod+Ctrl+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor4 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor4 --brightness
 
 #start applications
 bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -s
 #bindsym $mod+v exec clipmenu
 bindsym $mod+v exec copyq toggle
 bindsym $mod+Shift+r exec --no-startup-id terminator -e ranger
@@ -230,7 +234,7 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+n exec --no-startup-id netease-cloud-music
 bindsym $mod+Shift+m  exec --no-startup-id "xkbset m; xkbset exp =m; xmodmap .Xmodmap"
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $Shift+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+Shift+c exec --no-startup-id pkill compton
 bindsym $mod+Shift+bracketleft resize shrink height 10 px or 10 ppt
