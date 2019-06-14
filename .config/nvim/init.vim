@@ -1,22 +1,12 @@
-":filetype plugin on
-":syntax on
-":filetype indent on
-:set number
-:set ignorecase
-:set clipboard=unnamedplus
-"autocmd FileType python set breakindentopt=shift:4
-":set tabstop=8
-":set shiftwidth=4
-"
-"function! ResCur()
-"  if line("'\"") <= line("$")
-"    normal! g`"
-"    return 1
-"  endif
-"endfunction
-"
-"augroup resCur
-"  autocmd!
-"  autocmd BufWinEnter * call ResCur()
-"augroup END
-" let R_esc_term = 1
+set number
+set ignorecase
+" use system clipboard
+set clipboard=unnamedplus
+" space for enter tab
+set tabstop=4
+" indent when shift line
+set shiftwidth=4
+" restore cursor position
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
