@@ -13,4 +13,5 @@ alias nb='jupyter notebook'
 # autoload prompt themes
 autoload -Uz promptinit
 promptinit
-prompt off
+#prompt off
+prompt adam2
