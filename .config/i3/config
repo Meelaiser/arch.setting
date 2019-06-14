@@ -182,12 +182,12 @@ mode "$output" {
     bindsym l exec --no-startup-id "xrandr -o 1; pkill keynav; keynav", mode "default"
     bindsym r exec --no-startup-id "xrandr -o 3; pkill keynav; keynav", mode "default"
     # monitor
-    bindsym d exec --no-startup-id xrandr --output DP-2 --mode 2560x1440 --rate 144, mode "default"
-    bindsym Shift+d exec --no-startup-id xrandr --output DP-2 --off, mode "default"
-    bindsym e exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --rate 120, mode "default"
-    bindsym Shift+e exec --no-startup-id xrandr --output eDP-1 --off, mode "default"
-    bindsym h exec --no-startup-id xrandr --output HDMI-2 --auto, mode "default"
-    bindsym Shift+h exec --no-startup-id xrandr --output HDMI-2 --off, mode "default"
+    bindsym d exec --no-startup-id "xrandr --output DP-2 --primary --mode 2560x1440 --rate 144; pkill keynav; keynav", mode "default"
+    bindsym Shift+d exec --no-startup-id "xrandr --output DP-2 --off; pkill keynav; keynav", mode "default"
+    bindsym e exec --no-startup-id "xrandr --output eDP-1 --primary --mode 1920x1080 --rate 120; pkill keynav; keynav", mode "default"
+    bindsym Shift+e exec --no-startup-id "xrandr --output eDP-1 --off; pkill keynav; keynav", mode "default"
+    bindsym h exec --no-startup-id "xrandr --output HDMI-2 --primary --auto; pkill keynav; keynav", mode "default"
+    bindsym Shift+h exec --no-startup-id "xrandr --output HDMI-2 --off; pkill keynav; keynav", mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
