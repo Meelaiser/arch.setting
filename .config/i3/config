@@ -173,13 +173,22 @@ mode "$mode_system" {
 bindsym $mod+0 mode "$mode_system"
 
 #Set monitor output
-set $mode_orientation Change orientation to (n)ormal, (i)inverted, (l)eft, (r)ight
+set $output Change orientation to (n)ormal, (i)inverted, (l)eft, (r)ight, (d)P-2, (Shift+d)P-2-off, (e)DP-1, (Shift+e)DP-1-off
+#set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
 mode "$output" {
-    bindsym n exec --no-startup-id "xrandr -o 0; pkill keynav; keynav"; mode "default"
-    bindsym i exec --no-startup-id "xrandr -o 2; pkill keynav; keynav"; mode "default"
-    bindsym l exec --no-startup-id "xrandr -o 1; pkill keynav; keynav"; mode "default"
-    bindsym r exec --no-startup-id "xrandr -o 3; pkill keynav; keynav"; mode "default"
-    # exit orientation mode: "Enter" or "Escape"
+    # orientation
+    bindsym n exec --no-startup-id "xrandr -o 0; pkill keynav; keynav", mode "default"
+    bindsym i exec --no-startup-id "xrandr -o 2; pkill keynav; keynav", mode "default"
+    bindsym l exec --no-startup-id "xrandr -o 1; pkill keynav; keynav", mode "default"
+    bindsym r exec --no-startup-id "xrandr -o 3; pkill keynav; keynav", mode "default"
+    # monitor
+    bindsym d exec --no-startup-id "xrandr --output DP-2 --primary --mode 2560x1440 --rate 144; pkill keynav; keynav", mode "default"
+    bindsym Shift+d exec --no-startup-id "xrandr --output DP-2 --off; pkill keynav; keynav", mode "default"
+    bindsym e exec --no-startup-id "xrandr --output eDP-1 --primary --mode 1920x1080 --rate 120; pkill keynav; keynav", mode "default"
+    bindsym Shift+e exec --no-startup-id "xrandr --output eDP-1 --off; pkill keynav; keynav", mode "default"
+    bindsym h exec --no-startup-id "xrandr --output HDMI-2 --primary --auto; pkill keynav; keynav", mode "default"
+    bindsym Shift+h exec --no-startup-id "xrandr --output HDMI-2 --off; pkill keynav; keynav", mode "default"
+    # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -198,21 +207,21 @@ show_marks yes
 #dependancy bc
 set $monitor1 eDP-1
 set $monitor2 DP-1
-set $monitor3 DP-2
-set $monitor4 VGA-1
-#set $monitor3 HDMI-2
+set $monitor3 VGA-1
+set $monitor4 HDMI-2
 # monitor1
 bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor1 --brightness
 bindsym $mod+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor1 --brightness
 # monitor2
-bindsym $mod+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
-bindsym $mod+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
+bindsym $mod+ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
+bindsym $mod+ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
 # monitor3
-bindsym $mod+Ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
-bindsym $mod+Ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
+bindsym $mod+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
+bindsym $mod+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
 # monitor4
 bindsym $mod+Ctrl+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor4 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor4 --brightness
 bindsym $mod+Ctrl+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor4 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor4 --brightness
+# monitor4
 
 #start applications
 bindsym Print exec --no-startup-id i3-scrot
