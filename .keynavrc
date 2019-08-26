@@ -5,7 +5,6 @@ clear
 #daemonize
 
 super+g start, grid 10x4
-#alt+space start, grid 10x4
 space end
 Escape end
 super+space click 1,end
@@ -54,37 +53,17 @@ slash cell-select 10x4, warp, end
 comma cell-select 8x4, warp, end
 period cell-select 9x4, warp, end
 slash cell-select 10x4, warp, end
-alt+q cell-select 1x2, warp
-alt+w cell-select 2x2, warp
-alt+e cell-select 3x2, warp
-alt+r cell-select 4x2, warp
-alt+t cell-select 5x2, warp
-alt+y cell-select 6x2, warp
-alt+u cell-select 7x2, warp
-alt+i cell-select 8x2, warp
-alt+o cell-select 9x2, warp
-alt+p cell-select 10x2, warp
-alt+a cell-select 1x3, warp
-alt+s cell-select 2x3, warp
-alt+d cell-select 3x3, warp
-alt+f cell-select 4x3, warp
-alt+g cell-select 5x3, warp
-alt+h cell-select 6x3, warp
-alt+j cell-select 7x3, warp
-alt+k cell-select 8x3, warp
-alt+l cell-select 9x3, warp
-alt+semicolon cell-select 10x3, warp
-alt+z cell-select 1x4, warp
-alt+x cell-select 2x4, warp
-alt+c cell-select 3x4, warp
-alt+v cell-select 4x4, warp
-alt+b cell-select 5x4, warp
-alt+n cell-select 6x4, warp
-alt+m cell-select 7x4, warp
-alt+comma cell-select 8x4, warp
-alt+period cell-select 9x4, warp
-alt+slash cell-select 10x4, warp
 
+super+1 cell-select 1x1, warp
+super+2 cell-select 2x1, warp
+super+3 cell-select 3x1, warp
+super+4 cell-select 4x1, warp
+super+5 cell-select 5x1, warp
+super+6 cell-select 6x1, warp
+super+7 cell-select 7x1, warp
+super+8 cell-select 8x1, warp
+super+9 cell-select 9x1, warp
+super+0 cell-select 10x1, warp
 super+q cell-select 1x2, warp
 super+w cell-select 2x2, warp
 super+e cell-select 3x2, warp
@@ -118,11 +97,3 @@ super+slash cell-select 10x4, warp
 
 #a history-back
 #z cursorzoom 200 200
-
-### Example using the 'sh' command.
-# Make firefox the active window
-#f sh "xdotool windowactivate $(xdotool search -title -- '- Mozilla Firefox')", end
-# Make a new tab in google chrome:
-#t sh "xdotool windowactivate $(xdotool search --title -- '- Google Chrome' | head -1); xdotool key ctrl+t",end
-# Paste
-#v sh "xdotool key shift+Insert"

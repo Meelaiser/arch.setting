@@ -6,6 +6,10 @@ alias sps='sudo powerpill -S'
 alias y='yay'
 alias py='python'
 alias nb='jupyter notebook'
+alias rg='ranger'
+alias quitjupyter='kill $(pgrep jupyter)'
+alias pt='pandoc tmp.md -o tmp.docx'
+alias pl='pandoc tmp.md -o tmp.docx --columns=1 && libreoffice tmp.docx'
 
 #using miniconda
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh

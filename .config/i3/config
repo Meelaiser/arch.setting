@@ -1,77 +1,150 @@
-set $mod Mod4
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
+# font for title and bar
+font pango:Terminus 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+focus_follows_mouse no
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+default_border pixel 4 
+for_window [class="libreoffice"] focus child, layout tabbed, focus
+for_window [class="pulseeffects"] focus child, layout tabbed, focus
+for_window [class="copyq"] floating enable
+workspace_auto_back_and_forth yes
+show_marks yes
 
-# start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec terminator
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+Shift+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+h move left 100
-bindsym $mod+Shift+j move down 100
-bindsym $mod+Shift+k move up 100
-bindsym $mod+Shift+l move right 100
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left 100
-bindsym $mod+Shift+Down move down 100
-bindsym $mod+Shift+Up move up 100
-bindsym $mod+Shift+Right move right 100
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# use win as modifier
+set $mod Mod4
+#control primary monitor's brightness
+set $interval 0.05
+set $interval_h 0.025
 
 # focus the parent container
 bindsym $mod+a focus parent
+# dictionary
+bindsym $mod+c exec --no-startup-id goldendict
+# CLI music player
+bindsym $mod+Shift+c exec --no-startup-id " ! pgrep -x cmus && terminator -e cmus || cmus-remote -u"; exec --no-startup-id pulseeffects
+# reload the configuration file
+bindsym $mod+Shift+Ctrl+c reload
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# set time to turn off display
+bindsym $mod+Ctrl+d exec xset dpms 60
+bindsym $mod+Shift+Ctrl+d exec xset dpms 600
+# start dmenu with CLI
+bindsym $mod+Shift+d exec dmenu_run
+# change container layout to split
+bindsym $mod+e layout toggle split
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# browser
+bindsym $mod+Shift+f exec firefox
+# change focus left
+bindsym $mod+h focus left
+# move focused window to left
+bindsym $mod+Shift+h move left 200
+# invert color
+bindsym $mod+i exec --no-startup-id xcalib -i -a
+# change focus to down
+bindsym $mod+j focus down
+# move focused window to down
+bindsym $mod+Shift+j move down 200
+# change focus to up
+bindsym $mod+k focus up
+# kill window by pointer
+bindsym $mod+Ctrl+k --release exec --no-startup-id xkill
+# move focused window to up
+bindsym $mod+Shift+k move up 200
+# change focus to right
+bindsym $mod+l focus right
+# move focused window to right
+bindsym $mod+Shift+l move right 200
+# toggle i3 bar
+bindsym $mod+m bar mode toggle
+# map keboard's keys
+bindsym $mod+Shift+m  exec --no-startup-id "xkbset m; xkbset exp =m; xmodmap .Xmodmap"
+# navigate focused window
+bindsym $mod+n exec --no-startup-id wmfocus
+# change monitor
+bindsym $mod+o mode "$output"
+# volume control
+bindsym $mod+p exec pavucontrol
+# toggle window split
+bindsym $mod+q split toggle
+# quit focused window
+bindsym $mod+Shift+q kill
+# CLI file manager
+bindsym $mod+Shift+r exec --no-startup-id terminator -e ranger
+# resize window
+bindsym $mod+r mode "resize"
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+Ctrl+r restart
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+# temporary show title
+bindsym $mod+t border normal 4
+bindsym --release $mod+t border pixel 4
+# toggle touchpad
+bindsym $mod+Ctrl+t exec --no-startup-id synclient TouchpadOff=1
+bindsym $mod+Ctrl+Shift+t exec --no-startup-id synclient TouchpadOff=0
+# toggle clippad
+bindsym $mod+v exec copyq toggle
+# split window
+bindsym $mod+Ctrl+v split v
+# window tab
+bindsym $mod+w layout tabbed
+# decrease brightness
+bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -A 5 'primary' | awk 'NR == 1 {print $1} NR == 6 {print $2 - $interval * ($2 > $interval)}' | parallel -N 2 xrandr --output {1} --brightness {2}
+# decrease brightness
+bindsym $mod+Shift+period exec --no-startup-id xrandr --verbose | grep -A 5 'primary' | awk 'NR == 1 {print $1} NR == 6 {print $2 - $interval_h * ($2 > $interval_h)}' | parallel -N 2 xrandr --output {1} --brightness {2}
+# increase brightness
+bindsym $mod+slash exec --no-startup-id xrandr --verbose | grep -A 5 'primary' | awk 'NR == 1 {print $1} NR == 6 {print $2 + $interval * ($2 < 1)}' | parallel -N 2 xrandr --output {1} --brightness {2}
+# increase brightness
+bindsym $mod+Shift+slash exec --no-startup-id xrandr --verbose | grep -A 5 'primary' | awk 'NR == 1 {print $1} NR == 6 {print $2 + $interval_h * ($2 < 1)}' | parallel -N 2 xrandr --output {1} --brightness {2}
+# scratchpad (hidden area)
+bindsym $mod+grave scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+# toggle latest workspace
+bindsym $mod+Tab workspace back_and_forth
+# move latest workspace
+bindsym $mod+Ctrl+Tab move container to workspace back_and_forth workspace back_and_forth
+# send latest workspace
+bindsym $mod+Shift+Tab move container to workspace back_and_forth
+# start terminator(terminal)
+bindsym $mod+Return exec terminator
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# screenshot
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+# screenshot with selection
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
+# shrink window
+bindsym $mod+bracketleft resize shrink width 10 px or 10 ppt
+bindsym $mod+bracketright resize grow width 10 px or 10 ppt
+bindsym $mod+Shift+bracketleft resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+bracketright resize grow height 10 px or 10 ppt
+# alternative move focused window and change focus 
+bindsym $mod+Left focus left
+# move workspace
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Shift+Left move left 100
+bindsym $mod+Down focus down
+bindsym $mod+Shift+Down move down 100
+bindsym $mod+Up focus up
+bindsym $mod+Shift+Up move up 100
+bindsym $mod+Right focus right
+# move workspace
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Shift+Right move right 100
+# control system
+bindsym $mod+0 mode "$mode_system"
 
 # Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -81,7 +154,6 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -92,7 +164,6 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -103,18 +174,20 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
+# switch focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1 workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2 workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3 workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4 workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5 workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6 workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7 workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8 workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9 workspace $ws9
 
-# reload the configuration file
-bindsym $mod+Shift+Ctrl+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+Ctrl+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
         bindsym h resize shrink width 200 px or 200 ppt
         bindsym j resize grow height 200 px or 200 ppt
         bindsym k resize shrink height 200 px or 200 ppt
@@ -123,39 +196,28 @@ mode "resize" {
         bindsym i resize grow width 200 px or 200 ppt; resize shrink height 200 px or 200 ppt
         bindsym m resize shrink width 200 px or 200 ppt; resize grow height 200 px or 200 ppt
         bindsym comma resize grow width 200 px or 200 ppt; resize grow height 200 px or 200 ppt
-
-        # back to normal: Enter or Escape or $mod+r
+        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+Shift+r mode "default"
 }
-
-bindsym $mod+r mode "resize"
-
 # Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-#    status_command    i3status
     status_command    py3status -c ~/.config/i3status/config
     mode              hide
     hidden_state      hide
     workspace_buttons yes
-    
     font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
     colors {
         background #000000
         statusline #ffffff
-
         focused_workspace  #ffffff #285577
         active_workspace   #ffffff #333333
         inactive_workspace #888888 #222222
         urgent_workspace   #ffffff #900000
     }
 }
-
 # i3 exit
-set $Locker workspace Computer locked; exec --no-startup-id terminator -b --geometry=1920x1180 -e "cmatrix -r"; exec --no-startup-id sleep 1 && i3lock && sleep 1
+set $Locker workspace Computer locked; exec --no-startup-id terminator -b --geometry=2560x1440 -e "cmatrix -r"; exec --no-startup-id sleep 1 && i3lock && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
 #    bindsym l exec --no-startup-id $Locker, mode "default"
@@ -170,11 +232,8 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+0 mode "$mode_system"
-
 #Set monitor output
-set $output Change orientation to (n)ormal, (i)inverted, (l)eft, (r)ight, (d)P-2, (Shift+d)P-2-off, (e)DP-1, (Shift+e)DP-1-off
-#set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
+set $output Change output to (n)ormal, (i)inverted, (l)eft, (r)ight, (D)P-2, (Shift+D)P-2-aside, (e)DP-1, (Shift+e)DP-1-aside, (H)DMI-2, (Shift+H)DMI-2-aside
 mode "$output" {
     # orientation
     bindsym n exec --no-startup-id "xrandr -o 0; pkill keynav; keynav", mode "default"
@@ -182,82 +241,17 @@ mode "$output" {
     bindsym l exec --no-startup-id "xrandr -o 1; pkill keynav; keynav", mode "default"
     bindsym r exec --no-startup-id "xrandr -o 3; pkill keynav; keynav", mode "default"
     # monitor
-    bindsym d exec --no-startup-id "xrandr --output DP-2 --primary --mode 2560x1440 --rate 144; pkill keynav; keynav", mode "default"
-    bindsym Shift+d exec --no-startup-id "xrandr --output DP-2 --off; pkill keynav; keynav", mode "default"
-    bindsym e exec --no-startup-id "xrandr --output eDP-1 --primary --mode 1920x1080 --rate 120; pkill keynav; keynav", mode "default"
-    bindsym Shift+e exec --no-startup-id "xrandr --output eDP-1 --off; pkill keynav; keynav", mode "default"
-    bindsym h exec --no-startup-id "xrandr --output HDMI-2 --primary --auto; pkill keynav; keynav", mode "default"
-    bindsym Shift+h exec --no-startup-id "xrandr --output HDMI-2 --off; pkill keynav; keynav", mode "default"
+    bindsym e exec --no-startup-id "xrandr --output DP-2 --off; xrandr --output eDP-1 --primary --mode 1920x1080 --rate 120 --brightness 0.4; pkill keynav; keynav", mode "default"
+    bindsym d exec --no-startup-id "xrandr --output eDP-1 --off; xrandr --output DP-2 --primary --mode 2560x1440 --rate 144 --brightness 0.4; pkill keynav; keynav", mode "default"
+    bindsym Shift+d exec --no-startup-id "xrandr --output DP-2 --primary --mode 2560x1440 --rate 144 --brightness 0.4; pkill keynav; keynav", mode "default"
+    bindsym Shift+e exec --no-startup-id "xrandr --output eDP-1 --primary --mode 1920x1080 --rate 120 --brightness 0.4; pkill keynav; keynav", mode "default"
+    bindsym h exec --no-startup-id "xrandr --output eDP-1 --off; xrandr --output HDMI-2 --primary --auto --brightness 0.4; pkill keynav; keynav", mode "default"
+    bindsym Ctrl+h exec --no-startup-id xrandr --output HDMI-2 --auto --off, mode "default"
+    bindsym Shift+h exec --no-startup-id "xrandr --output HDMI-2 --primary --auto --brightness 0.4; pkill keynav; keynav", mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+o mode "$output"
-
-focus_follows_mouse no
-
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-default_border pixel 4 
-for_window [class="libreoffice"] focus child, layout tabbed, focus
-workspace_auto_back_and_forth yes
-show_marks yes
-
-#control brightness
-#dependancy bc
-set $monitor1 eDP-1
-set $monitor2 DP-1
-set $monitor3 VGA-1
-set $monitor4 HDMI-2
-# monitor1
-bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor1 --brightness
-bindsym $mod+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor1 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor1 --brightness
-# monitor2
-bindsym $mod+ctrl+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor2 --brightness
-bindsym $mod+ctrl+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor2 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor2 --brightness
-# monitor3
-bindsym $mod+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor3 --brightness
-bindsym $mod+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor3 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor3 --brightness
-# monitor4
-bindsym $mod+Ctrl+Shift+period exec --no-startup-id xrandr --verbose | grep -m 1 $monitor4 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} - 0.025 * ({} > 0.05)" | bc | xargs xrandr --output $monitor4 --brightness
-bindsym $mod+Ctrl+Shift+slash exec --no-startup-id xrandr --verbose | grep -m 1 $monitor4 -A 5 | tail -n 1 | awk '{print $2}' | xargs -I {} echo "{} + 0.025 * ({} < 1)" | bc | xargs xrandr --output $monitor4 --brightness
-# monitor4
-
-#start applications
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -s
-#bindsym $mod+v exec clipmenu
-bindsym $mod+v exec copyq toggle
-bindsym $mod+Shift+r exec --no-startup-id terminator -e ranger
-bindsym $mod+m bar mode toggle
-bindsym $mod+t border normal 4
-bindsym $mod+p exec pavucontrol
-bindsym $mod+bracketleft resize shrink width 10 px or 10 ppt
-bindsym $mod+bracketright resize grow width 10 px or 10 ppt
-bindsym $mod+c exec --no-startup-id goldendict
-bindsym $mod+n exec --no-startup-id wmfocus
-bindsym $mod+Ctrl+c exec --no-startup-id compton -f -b
-bindsym --release $mod+t border pixel 4
-bindsym $mod+grave scratchpad show
-bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+Shift+f exec firefox
-bindsym $mod+Shift+n exec --no-startup-id netease-cloud-music
-bindsym $mod+Shift+m  exec --no-startup-id "xkbset m; xkbset exp =m; xmodmap .Xmodmap"
-bindsym $Shift+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+grave move scratchpad
-bindsym $mod+Shift+c exec --no-startup-id pkill compton
-bindsym $mod+Shift+bracketleft resize shrink height 10 px or 10 ppt
-bindsym $mod+Shift+bracketright resize grow height 10 px or 10 ppt
-bindsym $mod+Shift+Tab move container to workspace back_and_forth
-bindsym $mod+Ctrl+k --release exec --no-startup-id xkill
-bindsym $mod+Ctrl+t exec --no-startup-id synclient TouchpadOff=1
-bindsym $mod+Ctrl+Shift+t exec --no-startup-id synclient TouchpadOff=0
-bindsym $mod+Ctrl+d exec xset dpms 60
-bindsym $mod+Shift+Ctrl+d exec xset dpms 600
-bindsym $mod+Ctrl+v split v
-bindsym $mod+q split toggle
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
 
 #auto start
 exec --no-startup-id fcitx

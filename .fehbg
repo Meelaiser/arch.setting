@@ -1,2 +1,0 @@
-#!/bin/sh
-feh --bg-scale ~/.config/i3/wallpaper_black_screen.png

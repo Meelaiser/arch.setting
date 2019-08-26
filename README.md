@@ -73,3 +73,17 @@ drag:
 ```
 q or -
 ```
+
+### Configuration
+
+Copy files with root.
+makepkg.conf to increase compiling speed.
+mousekey to custermizing mouskeys to replace mouse. 
+pacman.conf for showing colors.
+suppress-gpe61.service for kworker bug.
+```
+cp -f other/makepkg.conf /etc/makepkg.conf
+#cp -f other/mousekeys /usr/share/X11/xkb/compat/mousekeys
+cp -f other/pacman.conf /etc/pacman.conf
+#cp -f other/suppress-gpe61.service /etc/systemd/system/suppress-gpe61.service
+```
