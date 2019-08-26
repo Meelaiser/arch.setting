@@ -1,0 +1,9 @@
+# Before reboot
+#sudo pacman -S grub intel-ucode NetworkManager 
+# after reboot
+#sudo pacman -S xorg-server nvidia bumblebee mesa base-devel git 
+# git clone https://aur.archlinux.org/yay.git 
+# cd yay
+# makepkg -si
+#sudo sysytemctl enable bluetooth bumblebeed NetworkManager getty@tty1
+#diff -urNa .config/ ~/.config/
