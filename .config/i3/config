@@ -7,7 +7,6 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 default_border pixel 4 
 for_window [class="libreoffice"] focus child, layout tabbed, focus
-for_window [class="pulseeffects"] focus child, layout tabbed, focus
 for_window [class="copyq"] floating enable
 workspace_auto_back_and_forth yes
 show_marks yes
@@ -21,9 +20,9 @@ set $interval_h 0.025
 # focus the parent container
 bindsym $mod+a focus parent
 # dictionary
-bindsym $mod+c exec --no-startup-id goldendict
+bindsym $mod+c focus child
 # CLI music player
-bindsym $mod+Shift+c exec --no-startup-id " ! pgrep -x cmus && terminator -e cmus || cmus-remote -u"; exec --no-startup-id pulseeffects
+bindsym $mod+Ctrl+c exec --no-startup-id pulseeffects; exec --no-startup-id " ! pgrep -x cmus && terminator -e cmus || cmus-remote -u"; layout tabbed
 # reload the configuration file
 bindsym $mod+Shift+Ctrl+c reload
 # start dmenu (a program launcher)
@@ -34,15 +33,22 @@ bindsym $mod+Shift+Ctrl+d exec xset dpms 600
 # start dmenu with CLI
 bindsym $mod+Shift+d exec dmenu_run
 # change container layout to split
-bindsym $mod+e layout toggle split
+bindsym $mod+e exec --no-startup-id goldendict
+# kill window by pointer
+bindsym $mod+Ctrl+e kill
+bindsym $mod+Ctrl+Shift+e exec --no-startup-id xkill
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 # browser
-bindsym $mod+Shift+f exec firefox
+bindsym $mod+Ctrl+f exec firefox
+# open glava
+bindsym $mod+Ctrl+g exec --no-startup-id terminator -e glava
 # change focus left
 bindsym $mod+h focus left
+bindsym $mod+Ctrl+h pactl set-default-sink 1
+bindsym $mod+Ctrl+Shift+h pactl set-default-sink 0
 # move focused window to left
 bindsym $mod+Shift+h move left 200
 # invert color
@@ -53,8 +59,6 @@ bindsym $mod+j focus down
 bindsym $mod+Shift+j move down 200
 # change focus to up
 bindsym $mod+k focus up
-# kill window by pointer
-bindsym $mod+Ctrl+k --release exec --no-startup-id xkill
 # move focused window to up
 bindsym $mod+Shift+k move up 200
 # change focus to right
@@ -62,39 +66,46 @@ bindsym $mod+l focus right
 # move focused window to right
 bindsym $mod+Shift+l move right 200
 # toggle i3 bar
-bindsym $mod+m bar mode toggle
+bindsym $mod+b bar mode toggle
 # map keboard's keys
 bindsym $mod+Shift+m  exec --no-startup-id "xkbset m; xkbset exp =m; xmodmap .Xmodmap"
-# navigate focused window
-bindsym $mod+n exec --no-startup-id wmfocus
+# to focused window
+bindsym $mod+t exec --no-startup-id wmfocus
 # change monitor
 bindsym $mod+o mode "$output"
+# go to previous workspace
+bindsym $mod+p workspace prev
 # volume control
-bindsym $mod+p exec pavucontrol
+bindsym $mod+Ctrl+p exec pavucontrol
 # toggle window split
-bindsym $mod+q split toggle
+bindsym $mod+q split vertical
+bindsym $mod+Shift+q split horizontal 
 # quit focused window
-bindsym $mod+Shift+q kill
+#bindsym $mod+Shift+q split horizontal 
 # CLI file manager
-bindsym $mod+Shift+r exec --no-startup-id terminator -e ranger
+bindsym $mod+Ctrl+r exec --no-startup-id terminator -e ranger
 # resize window
 bindsym $mod+r mode "resize"
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+Ctrl+r restart
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-# temporary show title
-bindsym $mod+t border normal 4
-bindsym --release $mod+t border pixel 4
+bindsym $mod+Ctrl+s exec --no-startup-id spotify
+# go to next workspace
+bindsym $mod+n workspace next
+bindsym $mod+Ctrl+n exec --no-startup-id netease-cloud-music
 # toggle touchpad
 bindsym $mod+Ctrl+t exec --no-startup-id synclient TouchpadOff=1
 bindsym $mod+Ctrl+Shift+t exec --no-startup-id synclient TouchpadOff=0
+bindsym $mod+F1 exec --no-startup-id synclient TapButton1=0
+bindsym $mod+Shift+F1 exec --no-startup-id synclient TapButton1=1
 # toggle clippad
 bindsym $mod+v exec copyq toggle
 # split window
 bindsym $mod+Ctrl+v split v
 # window tab
 bindsym $mod+w layout tabbed
+bindsym $mod+Shift+w layout toggle split
 # decrease brightness
 bindsym $mod+period exec --no-startup-id xrandr --verbose | grep -A 5 'primary' | awk 'NR == 1 {print $1} NR == 6 {print $2 - $interval * ($2 > $interval)}' | parallel -N 2 xrandr --output {1} --brightness {2}
 # decrease brightness
@@ -128,19 +139,13 @@ bindsym $mod+bracketleft resize shrink width 10 px or 10 ppt
 bindsym $mod+bracketright resize grow width 10 px or 10 ppt
 bindsym $mod+Shift+bracketleft resize shrink height 10 px or 10 ppt
 bindsym $mod+Shift+bracketright resize grow height 10 px or 10 ppt
-# alternative move focused window and change focus 
-bindsym $mod+Left focus left
 # move workspace
-bindsym $mod+Ctrl+Left workspace prev
-bindsym $mod+Shift+Left move left 100
-bindsym $mod+Down focus down
-bindsym $mod+Shift+Down move down 100
-bindsym $mod+Up focus up
-bindsym $mod+Shift+Up move up 100
-bindsym $mod+Right focus right
-# move workspace
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Shift+Right move right 100
+bindsym $mod+Left workspace prev
+bindsym $mod+Ctrl+Left move container to workspace prev workspace prev
+bindsym $mod+Right workspace next
+bindsym $mod+Ctrl+Right move container to workspace next workspace next
+bindsym $mod+Down focus child
+bindsym $mod+Up focus parent
 # control system
 bindsym $mod+0 mode "$mode_system"
 
@@ -272,3 +277,6 @@ exec --no-startup-id syndaemon -i 1 -t -K -R
 # set wallpaper
 exec --no-startup-id ~/.fehbg &
 exec --no-startup-id dunst
+exec --no-startup-id synclient TapButton1=0
+bindsym $mod+Ctrl+u  exec --no-startup-id "xkbset -m; setxkbmap -layout us"
+bindsym $mod+Ctrl+j  exec --no-startup-id "export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab && jupyter lab"

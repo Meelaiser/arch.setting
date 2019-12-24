@@ -11,13 +11,13 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
-map <Space> <Plug>(easymotion-w)
-map <S-Space> <Plug>(easymotion-w)
+nmap <Space> <Plug>(easymotion-w)
+nmap <S-Space> <Plug>(easymotion-w)
+vmap <Space> <Plug>(easymotion-w)
+vmap <S-Space> <Plug>(easymotion-w)
 nmap <C-l> <Plug>(easymotion-overwin-line)
 autocmd WinLeave * silent
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'szymonmaszke/vimpyter'
-call plug#end()
-
-let g:deoplete#enable_at_startup = 1
+autocmd Filetype ipynb nmap <C-s> $a  <Esc>
+autocmd Filetype ipynb vmap <C-p> :!python<CR>
+nmap <C-q> :q<CR>
